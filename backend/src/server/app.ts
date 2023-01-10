@@ -1,0 +1,11 @@
+import 'express-async-errors';
+import * as express from 'express';
+import * as cors from 'cors';
+
+
+const app = express();
+
+app.use(express.json());
+app.use(cors());
+
+export default app;

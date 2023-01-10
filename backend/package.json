@@ -6,7 +6,7 @@
   "author": "Willian Bomfim",
   "license": "ISC",
   "scripts": {
-    "dev": "tsnd src/api/server.ts",
+    "dev": "tsnd src/server/server.ts",
     "lint": "eslint . --ext .ts",
     "test": "mocha -r ts-node/register ./tests/*$NAME*.{test,spec}.ts --exit",
     "test:coverage": "nyc npm run test"
