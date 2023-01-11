@@ -1,4 +1,5 @@
 import { model as createModel, Schema, Model, isValidObjectId } from 'mongoose';
+import { IClientModel } from './../../interfaces/IModels';
 import { IClient } from '../../interfaces/IClient';
 
 const clientSchema = new Schema<IClient>({
@@ -11,7 +12,7 @@ const clientSchema = new Schema<IClient>({
   versionKey: false,
 });
 
-export default class UserModel {
+export default class UserModel implements IClientModel<IClient> {
   private _model: Model<IClient>;
 
   constructor(model = createModel<IClient>('Client', clientSchema)) {

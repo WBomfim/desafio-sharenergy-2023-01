@@ -1,4 +1,5 @@
 import { model as createModel, Schema, Model, isValidObjectId } from 'mongoose';
+import { IUserModel } from './../../interfaces/IModels';
 import { IUser } from '../../interfaces/IUser';
 
 const userSchema = new Schema<IUser>({
@@ -8,7 +9,7 @@ const userSchema = new Schema<IUser>({
   versionKey: false,
 });
 
-export default class UserModel {
+export default class UserModel implements IUserModel<IUser> {
   private _model: Model<IUser>;
 
   constructor(model = createModel<IUser>('User', userSchema)) {
