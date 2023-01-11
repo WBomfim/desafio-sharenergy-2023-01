@@ -1,5 +1,5 @@
-export interface IUserService<T> {
-  readOne(_id: string): Promise<T | null>;
+export interface ILoginService<T> {
+  login(obj: unknown): Promise<string | null>;
 }
 
 export interface IClientService<T> {

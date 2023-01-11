@@ -1,4 +1,4 @@
-import { model as createModel, Schema, Model, isValidObjectId } from 'mongoose';
+import { model as createModel, Schema, Model } from 'mongoose';
 import { IUserModel } from './../../interfaces/IModels';
 import { IUser } from '../../interfaces/IUser';
 
@@ -16,8 +16,7 @@ export default class UserModel implements IUserModel<IUser> {
     this._model = model;
   }
 
-  public async readOne(_id:string): Promise<IUser | null> {
-    if (!isValidObjectId(_id)) throw new Error("Invalid ID");
-    return this._model.findOne({ _id });
+  public async readOne(userName:string): Promise<IUser | null> {
+    return this._model.findOne({ userName });
   }
 }
