@@ -12,7 +12,7 @@ const clientSchema = new Schema<IClient>({
   versionKey: false,
 });
 
-export default class UserModel implements IClientModel<IClient> {
+export default class ClientModel implements IClientModel<IClient> {
   private _model: Model<IClient>;
 
   constructor(model = createModel<IClient>('Client', clientSchema)) {

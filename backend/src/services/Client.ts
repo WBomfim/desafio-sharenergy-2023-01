@@ -3,7 +3,7 @@ import { IClientModel } from "../interfaces/IModels";
 import { IClient, ClientSchema } from "../interfaces/IClient";
 import { ZodSchema } from "zod";
 
-export default class CleintService implements IClientService<IClient> {
+export default class ClientService implements IClientService<IClient> {
   private _clientModel: IClientModel<IClient>;
   private _validateClient: ZodSchema<IClient>;
 

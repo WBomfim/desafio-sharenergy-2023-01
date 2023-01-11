@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { IClientService } from '../interfaces/IServices';
 import { IClient } from '../interfaces/IClient';
 
-export class ClientController {
+export default class ClientController {
   private _clientService: IClientService<IClient>;
 
   constructor(clientService: IClientService<IClient>) {

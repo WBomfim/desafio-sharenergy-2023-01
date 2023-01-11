@@ -9,7 +9,7 @@ export default class LoginController {
     this._userService = userService;
   }
 
-  public async readOne(req: Request, res: Response<string>) {
+  public async login(req: Request, res: Response<string>) {
     const loginObj = req.body;
     const token = await this._userService.login(loginObj);
     return res.status(200).json(token as string);
