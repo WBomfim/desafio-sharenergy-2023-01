@@ -9,7 +9,10 @@
     "dev": "tsnd src/server/server.ts",
     "lint": "eslint . --ext .ts",
     "test": "mocha -r ts-node/register ./tests/*$NAME*.{test,spec}.ts --exit",
-    "test:coverage": "nyc npm run test"
+    "test:coverage": "nyc npm run test",
+    "seederUsers": "npx ts-node src/datebase/seeders/createUsers.ts",
+    "seederClients": "npx ts-node src/datebase/seeders/createClients.ts",
+    "seeders": "npm run seederUsers && npm run seederClients"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.2",

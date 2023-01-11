@@ -2,7 +2,7 @@ import { model as createModel, Schema, Model, isValidObjectId } from 'mongoose';
 import { IClientModel } from './../../interfaces/IModels';
 import { IClient } from '../../interfaces/IClient';
 
-const clientSchema = new Schema<IClient>({
+export const clientSchema = new Schema<IClient>({
   name: { type: String, length: 3 },
   email: { type: String, length: 8 },
   phone: { type: String, length: 10 },
