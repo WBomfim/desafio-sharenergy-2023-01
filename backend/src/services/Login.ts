@@ -3,6 +3,7 @@ import { IUserModel } from "../interfaces/IModels";
 import { IUser } from "../interfaces/IUser";
 import { ErrorsTypes } from "../utils/errors/ErrorsCatalog";
 import { generateToken } from "../utils/authentication/handleToken";
+import { verifyPassword } from "../utils/authentication/passwordCrypto";
 
 export default class LoginService implements ILoginService<IUser> {
   private _userModel: IUserModel<IUser>;
@@ -13,11 +14,11 @@ export default class LoginService implements ILoginService<IUser> {
 
   public async login(obj: IUser): Promise<string | null> {
     const { username, password } = obj;
-
+    
     const user = await this._userModel.readOne(username);
 
     if (!user) throw new Error(ErrorsTypes.NOT_FOUND_USER);
-    if (user.password !== password) throw new Error(ErrorsTypes.INVALID_PASSWORD);
+    verifyPassword(password, user.password);
 
     const token = generateToken(user);
     return token;
