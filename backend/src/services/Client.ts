@@ -2,6 +2,7 @@ import { IClientService } from "../interfaces/IServices";
 import { IClientModel } from "../interfaces/IModels";
 import { IClient, ClientSchema } from "../interfaces/IClient";
 import { ZodSchema } from "zod";
+import { ErrorsTypes } from "../utils/ErrorsCatalog";
 
 export default class ClientService implements IClientService<IClient> {
   private _clientModel: IClientModel<IClient>;
@@ -24,7 +25,7 @@ export default class ClientService implements IClientService<IClient> {
 
   public async readOne(_id: string): Promise<IClient | null> {
     const client = await this._clientModel.readOne(_id);
-    if (!client) throw new Error("Client not found");
+    if (!client) throw new Error(ErrorsTypes.NOT_FOUND_CLIENT);
     return client;
   }
 
@@ -32,13 +33,13 @@ export default class ClientService implements IClientService<IClient> {
     const client = this._validateClient.safeParse(obj);
     if (!client.success) throw client.error;
     const newVehicle = await this._clientModel.update(_id, client.data);
-    if (!newVehicle) throw new Error("Client not found");
+    if (!newVehicle) throw new Error(ErrorsTypes.NOT_FOUND_CLIENT);
     return newVehicle;
   }
 
   public async delete(_id: string): Promise<true | null> {
     const client = await this._clientModel.delete(_id);
-    if (!client) throw new Error("Client not found");
+    if (!client) throw new Error(ErrorsTypes.NOT_FOUND_CLIENT);
     return true;
   }
 }

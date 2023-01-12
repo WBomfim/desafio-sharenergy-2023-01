@@ -1,6 +1,7 @@
 import { model as createModel, Schema, Model, isValidObjectId } from 'mongoose';
 import { IClientModel } from './../../interfaces/IModels';
 import { IClient } from '../../interfaces/IClient';
+import { ErrorsTypes } from '../../utils/ErrorsCatalog';
 
 export const clientSchema = new Schema<IClient>({
   name: { type: String, length: 3 },
@@ -28,17 +29,17 @@ export default class ClientModel implements IClientModel<IClient> {
   }
 
   public async readOne(_id:string): Promise<IClient | null> {
-    if (!isValidObjectId(_id)) throw new Error("Invalid ID");
+    if (!isValidObjectId(_id)) throw new Error(ErrorsTypes.INVALID_ID);
     return this._model.findOne({ _id });
   }
 
   public async update(_id:string, obj: Partial<IClient>): Promise<IClient | null> {
-    if (!isValidObjectId(_id)) throw new Error("Invalid ID");
+    if (!isValidObjectId(_id)) throw new Error(ErrorsTypes.INVALID_ID);
     return this._model.findOneAndUpdate({ _id }, { ...obj }, { new: true });
   }
 
   public async delete(_id:string): Promise<IClient | null> {
-    if (!isValidObjectId(_id)) throw new Error("Invalid ID");
+    if (!isValidObjectId(_id)) throw new Error(ErrorsTypes.INVALID_ID);
     return this._model.findByIdAndDelete(_id);
   }
 }
