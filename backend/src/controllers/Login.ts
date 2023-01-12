@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { ILoginService } from '../interfaces/IServices';
 import { IUser } from '../interfaces/IUser';
+import StatusHttp from '../utils/StatusHttp';
 
 export default class LoginController {
   private _loginService: ILoginService<IUser>;
@@ -12,6 +13,6 @@ export default class LoginController {
   public async login(req: Request, res: Response<string>) {
     const loginObj = req.body;
     const token = await this._loginService.login(loginObj);
-    return res.status(200).json(token as string);
+    return res.status(StatusHttp.OK).json(token as string);
   }
 }

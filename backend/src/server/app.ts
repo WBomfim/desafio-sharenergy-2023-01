@@ -4,7 +4,6 @@ import * as cors from 'cors';
 import loginRoutes from './routes/Login';
 import clientRoutes from './routes/Client';
 
-
 const app = express();
 
 app.use(express.json());
