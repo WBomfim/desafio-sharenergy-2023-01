@@ -1,6 +1,8 @@
 import { z } from 'zod';
 
 const UserSchema = z.object({
+  _id: z.string().optional(),
+  
   username: z.string({ required_error: 'Username is required' })
     .min(3, { message: 'Username must be at least 3 characters' }),
 
