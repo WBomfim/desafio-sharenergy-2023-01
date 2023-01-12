@@ -9,6 +9,6 @@ const userModel = new UserModel();
 const loginService = new LoginService(userModel);
 const loginController = new LoginController(loginService);
 
-router.post("/", loginController.login);
+router.post("/", (req, res) => loginController.login(req, res));
 
 export default router;

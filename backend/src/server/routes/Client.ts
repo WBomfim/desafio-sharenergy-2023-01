@@ -9,10 +9,10 @@ const clientModel = new ClientModel();
 const clientService = new ClientService(clientModel);
 const clientController = new ClientController(clientService);
 
-router.post("/", clientController.create);
-router.get("/", clientController.read);
-router.get("/:id", clientController.readOne);
-router.put("/:id", clientController.update);
-router.delete("/:id", clientController.delete);
+router.post("/", (req, res) => clientController.create(req, res));
+router.get("/", (req, res) => clientController.read(req, res));
+router.get("/:id", (req, res) => clientController.readOne(req, res));
+router.put("/:id", (req, res) => clientController.update(req, res));
+router.delete("/:id", (req, res) => clientController.delete(req, res));
 
 export default router;
