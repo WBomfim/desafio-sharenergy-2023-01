@@ -1,5 +1,7 @@
+export type tokenReturn = { token: string };
+
 export interface ILoginService<T> {
-  login(obj: unknown): Promise<string | null>;
+  login(obj: unknown): Promise<tokenReturn | null>;
 }
 
 export interface IClientService<T> {
