@@ -1,5 +1,5 @@
 export interface IUserModel<T> {
-  readOne(_id: string): Promise<T | null>;
+  readOne(username: string): Promise<T | null>;
 }
 
 export interface IClientModel<T> {

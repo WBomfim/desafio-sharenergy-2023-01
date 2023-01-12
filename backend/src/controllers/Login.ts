@@ -3,15 +3,15 @@ import { ILoginService } from '../interfaces/IServices';
 import { IUser } from '../interfaces/IUser';
 
 export default class LoginController {
-  private _userService: ILoginService<IUser>;
+  private _loginService: ILoginService<IUser>;
 
-  constructor(userService: ILoginService<IUser>) {
-    this._userService = userService;
+  constructor(loginService: ILoginService<IUser>) {
+    this._loginService = loginService;
   }
 
   public async login(req: Request, res: Response<string>) {
     const loginObj = req.body;
-    const token = await this._userService.login(loginObj);
+    const token = await this._loginService.login(loginObj);
     return res.status(200).json(token as string);
   }
 }

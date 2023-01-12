@@ -10,8 +10,8 @@ export default class LoginService implements ILoginService<IUser> {
   }
 
   public async login(obj: IUser): Promise<string | null> {
-    const { userName, password } = obj;
-    const user = await this._userModel.readOne(userName);
+    const { username, password } = obj;
+    const user = await this._userModel.readOne(username);
     if (!user) throw new Error("User not found");
     if (user.password !== password) throw new Error("Wrong password");
     return "Retornando o token";

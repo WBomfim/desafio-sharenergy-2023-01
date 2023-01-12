@@ -3,7 +3,7 @@ import { IUserModel } from './../../interfaces/IModels';
 import { IUser } from '../../interfaces/IUser';
 
 export const userSchema = new Schema<IUser>({
-  userName: { type: String, length: 3, unique: true },
+  username: { type: String, length: 3, unique: true },
   password: { type: String, length: 8 }
 }, {
   versionKey: false,
@@ -16,7 +16,7 @@ export default class UserModel implements IUserModel<IUser> {
     this._model = model;
   }
 
-  public async readOne(userName:string): Promise<IUser | null> {
-    return this._model.findOne({ userName });
+  public async readOne(username:string): Promise<IUser | null> {
+    return this._model.findOne({ username });
   }
 }

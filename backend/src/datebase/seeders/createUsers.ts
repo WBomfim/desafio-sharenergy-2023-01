@@ -8,7 +8,7 @@ const User = mongoose.model('User', userSchema);
 
 const users = [
   {
-    userName: "desafiosharenergy",
+    username: "desafiosharenergy",
     password: "sh@r3n3rgy",
   }
 ];
