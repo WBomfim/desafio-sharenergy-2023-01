@@ -9,7 +9,7 @@ const User = mongoose.model('User', userSchema);
 const users = [
   {
     username: "desafiosharenergy",
-    password: "sh@r3n3rgy",
+    password: "$2a$10$bz5n.moRbErFWlFYhq7ejuU3fU8njOUEreTyTptgX42Ht2WJN28BK",
   }
 ];
 
