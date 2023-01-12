@@ -1,7 +1,7 @@
 import { model as createModel, Schema, Model, isValidObjectId } from 'mongoose';
 import { IClientModel } from './../../interfaces/IModels';
 import { IClient } from '../../interfaces/IClient';
-import { ErrorsTypes } from '../../utils/ErrorsCatalog';
+import { ErrorsTypes } from '../../utils/errors/ErrorsCatalog';
 
 export const clientSchema = new Schema<IClient>({
   name: { type: String, length: 3 },

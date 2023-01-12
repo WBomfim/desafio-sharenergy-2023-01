@@ -1,4 +1,4 @@
-import StatusHttp from './StatusHttp';
+import StatusHttp from '../StatusHttp';
 
 type ErrorObject = { 
   statusHttp: number

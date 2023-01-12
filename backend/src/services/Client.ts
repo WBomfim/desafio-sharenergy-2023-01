@@ -2,7 +2,7 @@ import { IClientService } from "../interfaces/IServices";
 import { IClientModel } from "../interfaces/IModels";
 import { IClient, ClientSchema } from "../interfaces/IClient";
 import { ZodSchema } from "zod";
-import { ErrorsTypes } from "../utils/ErrorsCatalog";
+import { ErrorsTypes } from "../utils/errors/ErrorsCatalog";
 
 export default class ClientService implements IClientService<IClient> {
   private _clientModel: IClientModel<IClient>;
