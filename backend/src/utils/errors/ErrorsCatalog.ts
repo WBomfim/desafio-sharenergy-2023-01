@@ -7,7 +7,10 @@ type ErrorObject = {
 
 export enum ErrorsTypes {
   INVALID_ID = 'INVALID_ID',
+  INVALID_TOKEN = 'INVALID_TOKEN',
+  INVALID_PASSWORD = 'INVALID_PASSWORD',
   NOT_FOUND_CLIENT = 'NOT_FOUND_CLIENT',
+  NOT_FOUND_USER = 'NOT_FOUND_USER'
 }
 
 export type ErrorsCatalog = {
@@ -19,8 +22,20 @@ export const errorCatalog: ErrorsCatalog = {
     statusHttp: StatusHttp.BAD_REQUEST,
     message: 'Invalid id',
   },
+  INVALID_TOKEN: {
+    statusHttp: StatusHttp.UNAUTHORIZED,
+    message: 'Invalid token',
+  },
+  INVALID_PASSWORD: {
+    statusHttp: StatusHttp.UNAUTHORIZED,
+    message: 'Invalid password',
+  },
   NOT_FOUND_CLIENT: {
     statusHttp: StatusHttp.NOT_FOUND,
     message: 'Client not found',
+  },
+  NOT_FOUND_USER: {
+    statusHttp: StatusHttp.NOT_FOUND,
+    message: 'User not found',
   }
 };
