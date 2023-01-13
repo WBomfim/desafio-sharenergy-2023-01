@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { requestRegister } from '../../helpers/handleRequests';
-import { saveToken } from '../../helpers/handleStorage';
+import { saveToken, saveUser, getUser, getToken } from '../../helpers/handleStorage';
 
 const userSchema = z.object({
   username: z.string().min(3),
@@ -16,11 +16,25 @@ type token = {
 export default function Login(): JSX.Element {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [rememberMe, setRememberMe] = useState<boolean>(false);
   const [disabledButton, setDisabledButton] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [failedTryLogin, setFailedTryLogin] = useState<boolean>(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const verifyRememberMe = async (): Promise<void> => {
+      const user = await getToken();
+      if (user) {
+        console.log(user);
+      }
+      console.log(user);
+      
+    };
+  
+    verifyRememberMe();
+  }, []);
 
   useEffect(() => {
     const verifyData = (): void => {
@@ -43,6 +57,10 @@ export default function Login(): JSX.Element {
         username,
         password
       });
+
+      if (rememberMe) {
+        saveUser({ username, password });
+      }
 
       saveToken(token);
       navigate('/home');
@@ -79,6 +97,7 @@ export default function Login(): JSX.Element {
               placeholder='Seu nome aqui!'
             />
           </label>
+
           <label htmlFor='password-input'>
             Senha:
             <input
@@ -90,6 +109,16 @@ export default function Login(): JSX.Element {
               placeholder='**********'
             />
           </label>
+  
+          <label htmlFor='remember-me'>
+            <input
+              id='remember-me'
+              type='checkbox'
+              onChange={({ target: { checked } }) => setRememberMe(checked)}
+            />
+            Lembrar-me
+          </label>
+  
           <button
             type='submit'
             disabled={disabledButton}
@@ -100,6 +129,7 @@ export default function Login(): JSX.Element {
           >
             ENTRAR
           </button>
+
           <div>
             {failedTryLogin && (
               <p>Usuário ou senha invalido</p>
