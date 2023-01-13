@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { requestRegister } from '../../helpers/handleRequests';
-import { saveToken, saveUser, getUser, getToken } from '../../helpers/handleStorage';
+import { saveToken, saveLogin, getLogin, clearStorage } from '../../helpers/handleStorage';
 
 const userSchema = z.object({
   username: z.string().min(3),
   password: z.string().min(8)
 });
 
-type token = {
+type Token = {
   token: string;
 };
 
@@ -25,14 +25,10 @@ export default function Login(): JSX.Element {
 
   useEffect(() => {
     const verifyRememberMe = async (): Promise<void> => {
-      const user = await getToken();
-      if (user) {
-        console.log(user);
-      }
-      console.log(user);
-      
+      const { username, password } = getLogin();
+      if (!username || !password) return;
+      login(username, password);
     };
-  
     verifyRememberMe();
   }, []);
 
@@ -48,18 +44,18 @@ export default function Login(): JSX.Element {
     verifyData();
   }, [username, password]);
 
-  const login = async () => {
+  const login = async (username: string, password: string) => {
     setIsLoading(true);
     setFailedTryLogin(false);
 
     try {
-      const { token } = await requestRegister<token>("/login", {
+      const { token } = await requestRegister<Token>("/login", {
         username,
         password
       });
 
       if (rememberMe) {
-        saveUser({ username, password });
+        saveLogin({ username, password });
       }
 
       saveToken(token);
@@ -68,6 +64,7 @@ export default function Login(): JSX.Element {
     } catch (error) {
       setIsLoading(false);
       setFailedTryLogin(true);
+      clearStorage();
     }
   };
 
@@ -124,7 +121,7 @@ export default function Login(): JSX.Element {
             disabled={disabledButton}
             onClick={(event) => {
               event.preventDefault();
-              login();
+              login(username, password);
             }}
           >
             ENTRAR
