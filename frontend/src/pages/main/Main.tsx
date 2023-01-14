@@ -5,20 +5,33 @@ import { requestData, setToken } from "../../helpers/handleRequests";
 export default function Main() {
   const [users, setUsers] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    getUsers();
-  }, []);
+    const getUsersPage = async (page: number) => {
+      setIsLoading(true);
+      try {
+        setToken();
+        const users = await requestData<User[]>(`/users/page/${page}`);
+        setUsers(users);
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+      }
+    };
 
-  const getUsers = async () => {
-    setIsLoading(true);
-    try {
-      setToken();
-      const users = await requestData<User[]>("/users/page/1");
-      setUsers(users);
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
+    getUsersPage(page);
+  }, [page]);
+
+  const prevPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
+
+  const nextPage = () => {
+    if (page < 10) {
+      setPage(page + 1);
     }
   };
 
@@ -37,28 +50,32 @@ export default function Main() {
         </button>
       </div>
       <div>
-        <button
-          type="button"
-        >
-          anterior
-        </button>
-      <section>
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : (
-          users.map((user) => (
-            <UserCard
-              key={user.username}
-              user={user}
-            />
-          ))
-        )}
-      </section>
-        <button
-          type="button"
-        >
-          próximo
-        </button>
+        <div>
+          <button
+            type="button"
+            onClick={prevPage}
+          >
+            anterior
+          </button>
+          <button
+            type="button"
+            onClick={nextPage}
+          >
+            próximo
+          </button>
+        </div>
+        <section>
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : (
+            users.map((user) => (
+              <UserCard
+                key={user.username}
+                user={user}
+              />
+            ))
+          )}
+        </section>
       </div>
     </main>
   );
