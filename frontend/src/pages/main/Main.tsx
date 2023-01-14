@@ -1,3 +1,5 @@
+import { requestData, setToken } from "../../helpers/handleRequests";
+
 export default function Main() {
   return (
     <div>

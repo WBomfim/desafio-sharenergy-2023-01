@@ -59,7 +59,7 @@ export default function Login(): JSX.Element {
       }
 
       saveToken(token);
-      navigate('/home');
+      navigate('/main');
 
     } catch (error) {
       setIsLoading(false);

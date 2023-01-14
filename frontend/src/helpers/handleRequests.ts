@@ -1,8 +1,16 @@
 import axios from 'axios';
+import { getToken } from './handleStorage';
 
 const api = axios.create({
   baseURL: 'http://localhost:3001',
 });
+
+export const setToken = (): void => {
+  const token  = getToken();
+  if (token) {
+    api.defaults.headers.common.Authorization = token;
+  }
+};
 
 export const requestRegister = async <T>(rota: string, body: unknown): Promise<T> => {
   const { data } = await api.post(rota, body);
