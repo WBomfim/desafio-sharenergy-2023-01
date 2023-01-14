@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import UserCard, { User } from "../../components/userCard/UserCard";
 import { requestData, setToken } from "../../helpers/handleRequests";
 
-export default function Main() {
+export default function Main(): JSX.Element {
   const [users, setUsers] = useState<User[]>([]);
   const [search, setSearch] = useState<string>("");
   const [isRestore, setIsRestore] = useState<boolean>(false);
@@ -72,7 +72,7 @@ export default function Main() {
           type="button"
           onClick={onSearch}
         >
-          Search
+          Buscar
         </button>
       </div>
       <div>
