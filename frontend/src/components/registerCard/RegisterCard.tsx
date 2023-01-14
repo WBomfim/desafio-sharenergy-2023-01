@@ -1,13 +1,15 @@
-import { useState } from 'react';
-import { requestRegister, setToken } from '../../helpers/handleRequests';
+import { useState, useEffect } from 'react';
+import { requestRegister, setToken, requestUpdate } from '../../helpers/handleRequests';
+import { Client } from '../clientCard/ClientCard';
 
 type CardProps = {
   closeModal: React.Dispatch<React.SetStateAction<boolean>>;
   reloadClients: () => Promise<void>;
+  client?: Client;
 };
 
 export default function RegisterCard(
-  { closeModal, reloadClients }: CardProps
+  { closeModal, reloadClients, client }: CardProps
 ): JSX.Element {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -16,6 +18,16 @@ export default function RegisterCard(
   const [cpf, setCpf] = useState<string>('');
   const [failedTryRegister, setFailedTryRegister] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+
+  useEffect(() => {
+    if (client) {
+      setName(client.name);
+      setEmail(client.email);
+      setPhone(client.phone);
+      setAddress(client.address);
+      setCpf(client.cpf);
+    }
+  }, []);
 
   const registerClient = async () => {
     try {
@@ -32,6 +44,32 @@ export default function RegisterCard(
     } catch (error: any) {
       setFailedTryRegister(true);
       setErrorMessage(error.response.data.message)
+    }
+  };
+
+  const updateClient = async () => {
+    try {
+      setToken();
+      await requestUpdate(`/clients/${client?._id}`, {
+        name,
+        email,
+        phone,
+        address,
+        cpf,
+      });
+      reloadClients();
+      closeModal(false);
+    } catch (error: any) {
+      setFailedTryRegister(true);
+      setErrorMessage(error.response.data.message)
+    }
+  };
+
+  const handleRequest = async () => {
+    if (client) {
+      await updateClient();
+    } else {
+      await registerClient();
     }
   };
 
@@ -90,7 +128,7 @@ export default function RegisterCard(
 
         <button
           type="button"
-          onClick={registerClient}
+          onClick={handleRequest}
         >
           Salvar
         </button>
