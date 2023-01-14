@@ -6,8 +6,10 @@ import RegisterCard from "../../components/registerCard/RegisterCard";
 
 export default function Clients(): JSX.Element {
   const [clients, setClients] = useState<Client[]>([]);
+  const [clientToUpdate, setClientToUpdate] = useState<Client>();
   const [isLoading, setIsLoading] = useState(false);
   const [isRegister, setRegister] = useState(false);
+  const [isUpdate, setUpdate] = useState(false);
 
   useEffect(() => {
     getClients();
@@ -25,6 +27,13 @@ export default function Clients(): JSX.Element {
       setIsLoading(false);
     }
 
+  };
+
+  const updateClient = async (clientId: string) => {
+    setToken();
+    const client = await requestData<Client>(`/clients/${clientId}`);
+    setClientToUpdate(client);
+    setUpdate(true);
   };
 
   const deleteClient = async (clientId: string) => {
@@ -59,18 +68,32 @@ export default function Clients(): JSX.Element {
           <ClientCard
             key={client._id}
             client={client}
+            updateClient={updateClient}
             deleteClient={deleteClient}
           />
         ))}
       </section>
-      {isRegister && (
-        <Modal setShow={setRegister}>
+      <div>
+        {isRegister && (
+          <Modal setShow={setRegister}>
+            <RegisterCard
+              closeModal={setRegister}
+              reloadClients={getClients}
+            />
+          </Modal>
+        )}
+      </div>
+      <div>
+      {isUpdate && (
+        <Modal setShow={setUpdate}>
           <RegisterCard
-            closeModal={setRegister}
+            closeModal={setUpdate}
             reloadClients={getClients}
+            client={clientToUpdate}
           />
         </Modal>
       )}
+      </div>
     </main>
   );
 }

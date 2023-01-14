@@ -10,9 +10,12 @@ export type Client = {
 type ClientCardProps = {
   client: Client;
   deleteClient: (clientId: string) => void;
+  updateClient: (clientId: string) => void;
 };
 
-export default function ClientCard({ client, deleteClient}: ClientCardProps): JSX.Element {
+export default function ClientCard(
+  { client, deleteClient, updateClient}: ClientCardProps
+): JSX.Element {
 
   return (
     <section>
@@ -22,7 +25,12 @@ export default function ClientCard({ client, deleteClient}: ClientCardProps): JS
       <p>{client.address}</p>
       <p>{client.cpf}</p>
       <div>
-        <button>Editar</button>
+        <button
+          type="button"
+          onClick={() => updateClient(client._id)}
+        >
+          Editar
+        </button>
         <button
           type="button"
           onClick={() => deleteClient(client._id)}

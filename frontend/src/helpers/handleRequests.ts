@@ -27,7 +27,6 @@ export const requestUpdate = async <T>(rota: string, body: unknown): Promise<T> 
   return data;
 };
 
-export const requestDelete = async <T>(rota: string): Promise<T> => {
-  const { data } = await api.delete(rota);
-  return data;
+export const requestDelete = async (rota: string): Promise<void> => {
+  return await api.delete(rota);
 }
