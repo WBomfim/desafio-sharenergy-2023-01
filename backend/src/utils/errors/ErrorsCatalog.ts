@@ -11,7 +11,8 @@ export enum ErrorsTypes {
   INVALID_PASSWORD = 'INVALID_PASSWORD',
   NOT_FOUND_CLIENT = 'NOT_FOUND_CLIENT',
   NOT_FOUND_USER = 'NOT_FOUND_USER',
-  NOT_FOUND_TOKEN = 'NOT_FOUND_TOKEN'
+  NOT_FOUND_TOKEN = 'NOT_FOUND_TOKEN',
+  INTEGRATION_ERROR = 'INTEGRATION_ERROR',
 }
 
 export type ErrorsCatalog = {
@@ -42,5 +43,9 @@ export const errorCatalog: ErrorsCatalog = {
   NOT_FOUND_TOKEN: {
     statusHttp: StatusHttp.UNAUTHORIZED,
     message: 'Token not found',
+  },
+  INTEGRATION_ERROR: {
+    statusHttp: StatusHttp.NOT_FOUND,
+    message: 'Connection error with external engine',
   }
 };

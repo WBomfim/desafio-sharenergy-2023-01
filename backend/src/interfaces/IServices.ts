@@ -11,3 +11,8 @@ export interface IClientService<T> {
   update(_id: string, obj: T): Promise<T | null>;
   delete(_id: string): Promise<true | null>;
 }
+
+export interface IUserService<T> {
+  seachUser(search: string): Promise<T[]>;
+  readPage(page: number): Promise<T[]>;
+}
