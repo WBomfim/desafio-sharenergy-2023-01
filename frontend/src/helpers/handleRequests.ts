@@ -21,3 +21,13 @@ export const requestData = async <T>(rota: string): Promise<T> => {
   const { data } = await api.get(rota);
   return data;
 };
+
+export const requestUpdate = async <T>(rota: string, body: unknown): Promise<T> => {
+  const { data } = await api.put(rota, body);
+  return data;
+};
+
+export const requestDelete = async <T>(rota: string): Promise<T> => {
+  const { data } = await api.delete(rota);
+  return data;
+}
