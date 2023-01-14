@@ -38,7 +38,7 @@ const api = axios.create({
 
 export const getUsers = async (): Promise<UserResponse> => {
   try {
-    const { data } = await api.get('/?seed=abc&results=50&inc=picture,name,email,login,dob&noinfo');
+    const { data } = await api.get('/?seed=abc&results=100&inc=picture,name,email,login,dob&noinfo');
   return data;
   } catch (error) {
     throw new Error(ErrorsTypes.INTEGRATION_ERROR);
