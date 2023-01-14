@@ -3,10 +3,9 @@ import './modal.css';
 type ModalProps = {
   children: React.ReactNode;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
-  show: boolean;
 };
 
-export default function Modal({ children, setShow, show }: ModalProps): JSX.Element {
+export default function Modal({ children, setShow }: ModalProps): JSX.Element {
   return (
     <div className='modal'>
       <div className='modal-main'>
@@ -16,7 +15,7 @@ export default function Modal({ children, setShow, show }: ModalProps): JSX.Elem
       </div>
       <button
         className='modal-close'
-        onClick={ () => setShow(!show) }
+        onClick={ () => setShow(false) }
       >
         X
       </button>
