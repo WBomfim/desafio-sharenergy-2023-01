@@ -1,4 +1,4 @@
-type User = {
+export type User = {
   fullName: string;
   age: number;
   email: string;
@@ -6,7 +6,7 @@ type User = {
   picture: string;
 };
 
-export default function UserCard(user: User) {
+export default function UserCard({ user }: { user: User}): JSX.Element {
   return (
     <section>
       <img src={user.picture} alt={`Foto de ${user.fullName}`} />
