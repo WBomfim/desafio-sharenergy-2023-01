@@ -8,9 +8,14 @@ import Header from "../../components/header/Header";
 export default function Clients(): JSX.Element {
   const [clients, setClients] = useState<Client[]>([]);
   const [clientToUpdate, setClientToUpdate] = useState<Client>();
+  const [search, setSearch] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
   const [isRegister, setRegister] = useState(false);
   const [isUpdate, setUpdate] = useState(false);
+
+  const filteredClients = clients.filter((client) => {
+    return client.name.toLowerCase().includes(search.toLowerCase());
+  });
 
   useEffect(() => {
     getClients();
@@ -43,25 +48,17 @@ export default function Clients(): JSX.Element {
     getClients();
   };
 
-  if (isLoading) {
-    return (
-      <>
-        <Header />
-        <main>
-          <section>
-            <h1>Carregando...</h1>
-          </section>
-        </main>
-      </>
-    )
-  }
-
   return (
     <>
       <Header />
       <main>
         <div>
-          <input type="text" />
+          <input
+            type="text"
+            placeholder="Pesquisar cliente"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
           <button
             type="button"
             onClick={() => setRegister(true)}
@@ -69,37 +66,56 @@ export default function Clients(): JSX.Element {
             Adicionar
           </button>
         </div>
-        <section>
-          {clients.map((client) => (
-            <ClientCard
-              key={client._id}
-              client={client}
-              updateClient={updateClient}
-              deleteClient={deleteClient}
-            />
-          ))}
-        </section>
-        <div>
-          {isRegister && (
-            <Modal setShow={setRegister}>
-              <RegisterCard
-                closeModal={setRegister}
-                reloadClients={getClients}
-              />
-            </Modal>
-          )}
-        </div>
-        <div>
-        {isUpdate && (
-          <Modal setShow={setUpdate}>
-            <RegisterCard
-              closeModal={setUpdate}
-              reloadClients={getClients}
-              client={clientToUpdate}
-            />
-          </Modal>
+        {isLoading ? (
+          <div>
+            <p>Carregando...</p>
+          </div>
+        ) : (
+          <div>
+            <section>
+              {search.length > 0 ? (
+                filteredClients.map((client) => (
+                  <ClientCard
+                    key={client._id}
+                    client={client}
+                    updateClient={updateClient}
+                    deleteClient={deleteClient}
+                  />
+                ))
+              ) : (
+                clients.map((client) => (
+                  <ClientCard
+                    key={client._id}
+                    client={client}
+                    updateClient={updateClient}
+                    deleteClient={deleteClient}
+                  />
+                ))
+              )}
+            </section>
+            <div>
+              {isRegister && (
+                <Modal setShow={setRegister}>
+                  <RegisterCard
+                    closeModal={setRegister}
+                    reloadClients={getClients}
+                  />
+                </Modal>
+              )}
+            </div>
+            <div>
+            {isUpdate && (
+              <Modal setShow={setUpdate}>
+                <RegisterCard
+                  closeModal={setUpdate}
+                  reloadClients={getClients}
+                  client={clientToUpdate}
+                />
+              </Modal>
+            )}
+            </div>
+          </div>
         )}
-        </div>
       </main>
     </>
   );
