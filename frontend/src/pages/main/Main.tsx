@@ -95,10 +95,7 @@ export default function Main(): JSX.Element {
             <p>Loading...</p>
           ) : (
             users.map((user) => (
-              <UserCard
-                key={user.username}
-                user={user}
-              />
+              <UserCard key={user.username} user={user} />
             ))
           )}
         </section>
