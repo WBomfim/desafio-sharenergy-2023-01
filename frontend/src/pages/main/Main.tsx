@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Header from "../../components/header/Header";
 import UserCard, { User } from "../../components/userCard/UserCard";
 import { requestData, setToken } from "../../helpers/handleRequests";
 
@@ -59,47 +60,50 @@ export default function Main(): JSX.Element {
   };
 
   return (
-    <main>
-      <div>
-        <input
-          type="text"
-          id="search-user"
-          placeholder="Search a user"
-          value={search}
-          onChange={(e) => verifyInput(e)}
-        />
-        <button
-          type="button"
-          onClick={onSearch}
-        >
-          Buscar
-        </button>
-      </div>
-      <div>
+    <>
+      <Header/>
+      <main>
         <div>
+          <input
+            type="text"
+            id="search-user"
+            placeholder="Search a user"
+            value={search}
+            onChange={(e) => verifyInput(e)}
+          />
           <button
             type="button"
-            onClick={prevPage}
+            onClick={onSearch}
           >
-            anterior
-          </button>
-          <button
-            type="button"
-            onClick={nextPage}
-          >
-            próximo
+            Buscar
           </button>
         </div>
-        <section>
-          {isLoading ? (
-            <p>Loading...</p>
-          ) : (
-            users.map((user) => (
-              <UserCard key={user.username} user={user} />
-            ))
-          )}
-        </section>
-      </div>
-    </main>
+        <div>
+          <div>
+            <button
+              type="button"
+              onClick={prevPage}
+            >
+              anterior
+            </button>
+            <button
+              type="button"
+              onClick={nextPage}
+            >
+              próximo
+            </button>
+          </div>
+          <section>
+            {isLoading ? (
+              <p>Loading...</p>
+            ) : (
+              users.map((user) => (
+                <UserCard key={user.username} user={user} />
+              ))
+            )}
+          </section>
+        </div>
+      </main>
+    </>
   );
 }

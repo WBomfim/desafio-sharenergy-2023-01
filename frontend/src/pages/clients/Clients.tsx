@@ -3,6 +3,7 @@ import { requestData, setToken, requestDelete } from "../../helpers/handleReques
 import ClientCard, { Client } from "../../components/clientCard/ClientCard";
 import Modal from "../../components/modal/Modal";
 import RegisterCard from "../../components/registerCard/RegisterCard";
+import Header from "../../components/header/Header";
 
 export default function Clients(): JSX.Element {
   const [clients, setClients] = useState<Client[]>([]);
@@ -44,56 +45,62 @@ export default function Clients(): JSX.Element {
 
   if (isLoading) {
     return (
-      <main>
-        <section>
-          <h1>Carregando...</h1>
-        </section>
-      </main>
+      <>
+        <Header />
+        <main>
+          <section>
+            <h1>Carregando...</h1>
+          </section>
+        </main>
+      </>
     )
   }
 
   return (
-    <main>
-      <div>
-        <input type="text" />
-        <button
-          type="button"
-          onClick={() => setRegister(true)}
-        >
-          Adicionar
-        </button>
-      </div>
-      <section>
-        {clients.map((client) => (
-          <ClientCard
-            key={client._id}
-            client={client}
-            updateClient={updateClient}
-            deleteClient={deleteClient}
-          />
-        ))}
-      </section>
-      <div>
-        {isRegister && (
-          <Modal setShow={setRegister}>
+    <>
+      <Header />
+      <main>
+        <div>
+          <input type="text" />
+          <button
+            type="button"
+            onClick={() => setRegister(true)}
+          >
+            Adicionar
+          </button>
+        </div>
+        <section>
+          {clients.map((client) => (
+            <ClientCard
+              key={client._id}
+              client={client}
+              updateClient={updateClient}
+              deleteClient={deleteClient}
+            />
+          ))}
+        </section>
+        <div>
+          {isRegister && (
+            <Modal setShow={setRegister}>
+              <RegisterCard
+                closeModal={setRegister}
+                reloadClients={getClients}
+              />
+            </Modal>
+          )}
+        </div>
+        <div>
+        {isUpdate && (
+          <Modal setShow={setUpdate}>
             <RegisterCard
-              closeModal={setRegister}
+              closeModal={setUpdate}
               reloadClients={getClients}
+              client={clientToUpdate}
             />
           </Modal>
         )}
-      </div>
-      <div>
-      {isUpdate && (
-        <Modal setShow={setUpdate}>
-          <RegisterCard
-            closeModal={setUpdate}
-            reloadClients={getClients}
-            client={clientToUpdate}
-          />
-        </Modal>
-      )}
-      </div>
-    </main>
+        </div>
+      </main>
+    </>
   );
 }

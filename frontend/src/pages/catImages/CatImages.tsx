@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Header from "../../components/header/Header";
 
 export default function CatImages(): JSX.Element {
   const [code, setCode] = useState("");
@@ -18,22 +19,25 @@ export default function CatImages(): JSX.Element {
   };
 
   return (
-    <main>
-      <div>
-        <input
-          type="text"
-          value={code}
-          placeholder="Digite um código Http"
-          onChange={(e) => setCode(e.target.value)}
-        />
-        <button
-          type="button"
-          onClick={() => getCatImage()}
-        >
-          Buscar
-        </button>
-      </div>
-      <img src={url} alt="cat" />
-    </main>
+    <>
+      <Header />
+      <main>
+        <div>
+          <input
+            type="text"
+            value={code}
+            placeholder="Digite um código Http"
+            onChange={(e) => setCode(e.target.value)}
+          />
+          <button
+            type="button"
+            onClick={() => getCatImage()}
+          >
+            Buscar
+          </button>
+        </div>
+        <img src={url} alt="cat" />
+      </main>
+    </>
   );
 }

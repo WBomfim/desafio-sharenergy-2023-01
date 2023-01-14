@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Header from "../../components/header/Header";
 import axios from "axios";
 
 export default function DogImages(): JSX.Element {
@@ -15,16 +16,19 @@ export default function DogImages(): JSX.Element {
   };
 
   return (
-    <main>
-      <div>
-        <button
-          type="button"
-          onClick={() => getDogImage()}
-        >
-          Recarregar
-        </button>
-      </div>
-      <img src={url} alt="dog" />
-    </main>
+    <>
+      <Header />
+      <main>
+        <div>
+          <button
+            type="button"
+            onClick={() => getDogImage()}
+          >
+            Recarregar
+          </button>
+        </div>
+        <img src={url} alt="dog" />
+      </main>
+    </>
   );
 }
