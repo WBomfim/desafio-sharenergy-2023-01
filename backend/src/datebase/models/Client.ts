@@ -25,7 +25,7 @@ export default class ClientModel implements IClientModel<IClient> {
   }
 
   public async read(): Promise<IClient[]> {
-    return this._model.find({}).select('_id name email');
+    return this._model.find({});
   }
 
   public async readOne(_id:string): Promise<IClient | null> {
