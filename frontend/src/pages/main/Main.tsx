@@ -4,24 +4,47 @@ import { requestData, setToken } from "../../helpers/handleRequests";
 
 export default function Main() {
   const [users, setUsers] = useState<User[]>([]);
+  const [search, setSearch] = useState<string>("");
+  const [isRestore, setIsRestore] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    const getUsersPage = async (page: number) => {
-      setIsLoading(true);
-      try {
-        setToken();
-        const users = await requestData<User[]>(`/users/page/${page}`);
-        setUsers(users);
-        setIsLoading(false);
-      } catch (error) {
-        setIsLoading(false);
-      }
-    };
-
     getUsersPage(page);
-  }, [page]);
+  }, [page, isRestore]);
+
+  const getUsersPage = async (param: unknown) => {
+    setIsLoading(true);
+    let users: User[];
+    try {
+      setToken();
+      if (typeof param === "string") {
+        users = await requestData<User[]>(`/users/search?q=${param}`);
+      } else {
+        users = await requestData<User[]>(`/users/page/${page}`);
+      }
+      setUsers(users);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
+  };
+
+  const verifyInput = (event: { target: { value: string}}) => {
+    const { value } = event.target;
+    if (value === "" && users.length !== 10) {
+      setIsRestore(!isRestore);
+    }
+    setSearch(value);
+  };
+
+  const onSearch = () => {
+    if (search) {
+      getUsersPage(search);
+    } else {
+      getUsersPage(page);
+    }
+  };
 
   const prevPage = () => {
     if (page > 1) {
@@ -42,9 +65,12 @@ export default function Main() {
           type="text"
           id="search-user"
           placeholder="Search a user"
+          value={search}
+          onChange={(e) => verifyInput(e)}
         />
         <button
           type="button"
+          onClick={onSearch}
         >
           Search
         </button>
