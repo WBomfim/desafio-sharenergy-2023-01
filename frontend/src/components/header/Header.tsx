@@ -26,7 +26,8 @@ export default function Header(): JSX.Element {
 
   return (
     <header
-      className="flex flex-wrap justify-between items-center bg-slate-200 p-8"
+      className={`flex flex-wrap justify-between items-center
+        bg-slate-200 p-8 rounded-b-xl shadow-md`}
     >
       <div
         className="flex pl-10"
@@ -75,7 +76,7 @@ export default function Header(): JSX.Element {
       </div>
       <div>
         <Button
-          sx={{backgroundColor: 'teal', fontWeight: 'bold', padding: '10px 40px'}}
+          className='bg-teal-600 hover:bg-teal-700 padd font-bold px-10 py-2'
           variant='contained'
           type="button"
           onClick={logout}
