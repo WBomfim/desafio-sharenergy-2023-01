@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Button } from '@mui/material';
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { decodeToken } from "react-jwt";
@@ -25,41 +25,63 @@ export default function Header(): JSX.Element {
   };
 
   return (
-    <header>
-      <div>
-        <h1>
+    <header
+      className="flex flex-wrap justify-between items-center bg-slate-200 p-8"
+    >
+      <div
+        className="flex pl-10"
+      >
+        <h1
+          className="text-2xl font-bold"
+        >
           {`Olá, ${username}!`}
         </h1>
       </div>
-      <div>
+      <div
+        className="flex gap-10"
+      >
         <Link
-          to="/main"
+          className="font-bold text-lg hover:text-teal-600"
+          underline="none"
+          color="inherit"
+          href='/main'
         >
           Usuários
         </Link>
         <Link
-          to="/clients"
+          className="font-bold text-lg hover:text-teal-600"
+          underline="none"
+          color="inherit"
+          href='/clients'
         >
           Clientes
         </Link>
         <Link
-          to="/cat-images"
+          className="font-bold text-lg hover:text-teal-600"
+          underline="none"
+          color="inherit"
+          href='/cat-images'
         >
           Gatos
         </Link>
         <Link
-          to="/dog-images"
+          className="font-bold text-lg hover:text-teal-600"
+          underline="none"
+          color="inherit"
+          href='/dog-images'
         >
           Cachorros
         </Link>
       </div>
       <div>
-        <button
+        <Button
+          sx={{backgroundColor: 'teal', fontWeight: 'bold', padding: '10px 40px'}}
+          variant='contained'
           type="button"
           onClick={logout}
         >
           Sair
-        </button>
+        </Button>
       </div>
     </header>
   );
