@@ -1,3 +1,4 @@
+import { Button, TextField } from "@mui/material";
 import { useState, useEffect } from "react";
 import Header from "../../components/header/Header";
 
@@ -21,22 +22,33 @@ export default function CatImages(): JSX.Element {
   return (
     <>
       <Header />
-      <main>
-        <div>
-          <input
+      <main
+        className="flex flex-col items-center gap-8"
+      >
+        <div
+          className="flex gap-5 mt-8"
+        >
+          <TextField
+            className="shadow-md"
             type="text"
             value={code}
             placeholder="Digite um código Http"
             onChange={(e) => setCode(e.target.value)}
           />
-          <button
+          <Button
+            className="bg-teal-600 hover:bg-teal-700 font-bold px-8 shadow-lg"
             type="button"
+            variant="contained"
             onClick={() => getCatImage()}
           >
             Buscar
-          </button>
+          </Button>
         </div>
-        <img src={url} alt="cat" />
+        <img
+          src={url}
+          alt="cat"
+          className="w-2/5 rounded-2xl"
+        />
       </main>
     </>
   );
