@@ -4,7 +4,6 @@ import Main from './pages/main/Main';
 import CatImages from './pages/catImages/CatImages';
 import DogImages from './pages/dogImages/DogImages';
 import Clients from './pages/clients/Clients';
-import './globalStyle.css';
 
 export default function App() {
   return (
