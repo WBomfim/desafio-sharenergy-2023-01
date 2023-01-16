@@ -4,7 +4,7 @@ import ClientCard, { Client } from "../../components/clientCard/ClientCard";
 import Modal from "../../components/modal/Modal";
 import RegisterCard from "../../components/registerCard/RegisterCard";
 import Header from "../../components/header/Header";
-import { Button, TextField } from "@mui/material";
+import { Button, CircularProgress, TextField } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 
 export default function Clients(): JSX.Element {
@@ -75,7 +75,7 @@ export default function Clients(): JSX.Element {
         </div>
         {isLoading ? (
           <div>
-            <p>Carregando...</p>
+            <CircularProgress color="inherit" />
           </div>
         ) : (
           <>

@@ -1,4 +1,4 @@
-import { Button, Pagination, TextField } from "@mui/material";
+import { Button, CircularProgress, Pagination, TextField } from "@mui/material";
 import { useState, useEffect } from "react";
 import Header from "../../components/header/Header";
 import UserCard, { User } from "../../components/userCard/UserCard";
@@ -110,7 +110,7 @@ export default function Main(): JSX.Element {
             className="flex flex-col items-center gap-10 w-3/4"
           >
             {isLoading ? (
-              <p>Loading...</p>
+              <CircularProgress color="inherit" />
             ) : (
               users.map((user) => (
                 <UserCard key={user.username} user={user} />
