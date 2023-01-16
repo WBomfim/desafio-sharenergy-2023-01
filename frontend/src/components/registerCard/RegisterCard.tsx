@@ -1,3 +1,4 @@
+import { Button, TextField } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { requestRegister, setToken, requestUpdate } from '../../helpers/handleRequests';
 import { Client } from '../clientCard/ClientCard';
@@ -75,10 +76,17 @@ export default function RegisterCard(
 
   return (
     <section>
-      <form>
-        <label htmlFor="name">
-          Nome
-          <input
+      <form
+        className='flex flex-col gap-8'
+      >
+        <label
+          className='flex flex-col text-gray-500 text-xl font-bold'
+          htmlFor="name"
+        >
+          
+          Nome:
+          <TextField
+            variant='standard'
             type="text"
             id="name"
             value={name}
@@ -86,9 +94,13 @@ export default function RegisterCard(
           />
         </label>
 
-        <label htmlFor="email">
-          Email
-          <input
+        <label
+          className='flex flex-col text-gray-500 text-xl font-bold'
+          htmlFor="email"
+        >
+          Email:
+          <TextField
+            variant='standard'
             type="email"
             id="email"
             value={email}
@@ -96,9 +108,13 @@ export default function RegisterCard(
           />
         </label>
 
-        <label htmlFor="phone">
-          Telefone
-          <input
+        <label
+          className='flex flex-col text-gray-500 text-xl font-bold'
+          htmlFor="phone"
+        >
+          Telefone:
+          <TextField
+            variant='standard'
             type="text"
             id="phone"
             value={phone}
@@ -106,9 +122,13 @@ export default function RegisterCard(
           />
         </label>
 
-        <label htmlFor="address">
-          Endereço
-          <input
+        <label
+          className='flex flex-col text-gray-500 text-xl font-bold'
+          htmlFor="address"
+        >
+          Endereço:
+          <TextField
+            variant='standard'
             type="text"
             id="address"
             value={address}
@@ -116,9 +136,13 @@ export default function RegisterCard(
           />
         </label>
 
-        <label htmlFor="cpf">
-          CPF
-          <input
+        <label
+          className='flex flex-col text-gray-500 text-xl font-bold'
+          htmlFor="cpf"
+        >
+          CPF:
+          <TextField
+            variant='standard'
             type="text"
             id="cpf"
             value={cpf}
@@ -126,12 +150,14 @@ export default function RegisterCard(
           />
         </label>
 
-        <button
+        <Button
+          className='bg-teal-600 hover:bg-teal-700 font-bold shadow-xl text-white h-12'
+          variant="contained"
           type="button"
           onClick={handleRequest}
         >
           Salvar
-        </button>
+        </Button>
       </form>
       <div>
         {failedTryRegister && (

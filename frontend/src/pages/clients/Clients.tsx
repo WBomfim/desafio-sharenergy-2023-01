@@ -80,7 +80,7 @@ export default function Clients(): JSX.Element {
         ) : (
           <>
             <section
-              className="flex flex-col items-center gap-10 w-screen"
+              className="flex flex-col items-center gap-10 w-full"
             >
               {search.length > 0 ? (
                 filteredClients.map((client) => (
