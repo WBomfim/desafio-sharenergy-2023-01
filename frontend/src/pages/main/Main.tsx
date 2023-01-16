@@ -27,17 +27,10 @@ export default function Main(): JSX.Element {
       }
       setUsers(users);
       setIsLoading(false);
+      setSearch("");
     } catch (error) {
       setIsLoading(false);
     }
-  };
-
-  const verifyInput = (event: { target: { value: string}}) => {
-    const { value } = event.target;
-    if (value === "" && users.length !== 10) {
-      setIsRestore(!isRestore);
-    }
-    setSearch(value);
   };
 
   const onSearch = () => {
@@ -73,7 +66,7 @@ export default function Main(): JSX.Element {
             type="text"
             placeholder="Search a user"
             value={search}
-            onChange={(e) => verifyInput(e)}
+            onChange={(e) => setSearch(e.target.value)}
           />
           <Button
             className="bg-teal-600 hover:bg-teal-700 font-bold px-8 shadow-lg text-white"
