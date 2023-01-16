@@ -71,7 +71,6 @@ export default function Main(): JSX.Element {
         >
           <TextField
             type="text"
-            id="search-user"
             placeholder="Search a user"
             value={search}
             onChange={(e) => verifyInput(e)}

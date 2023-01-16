@@ -4,6 +4,8 @@ import ClientCard, { Client } from "../../components/clientCard/ClientCard";
 import Modal from "../../components/modal/Modal";
 import RegisterCard from "../../components/registerCard/RegisterCard";
 import Header from "../../components/header/Header";
+import { Button, TextField } from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
 
 export default function Clients(): JSX.Element {
   const [clients, setClients] = useState<Client[]>([]);
@@ -32,7 +34,6 @@ export default function Clients(): JSX.Element {
     } catch (error) {
       setIsLoading(false);
     }
-
   };
 
   const updateClient = async (clientId: string) => {
@@ -51,28 +52,36 @@ export default function Clients(): JSX.Element {
   return (
     <>
       <Header />
-      <main>
-        <div>
-          <input
+      <main
+        className="flex flex-col items-center"
+      >
+        <div
+          className="flex gap-10 mt-5"
+        >
+          <TextField
             type="text"
             placeholder="Pesquisar cliente"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <button
+          <Button
+            className="bg-teal-600 hover:bg-teal-700 font-bold px-8 shadow-lg text-white"
             type="button"
             onClick={() => setRegister(true)}
           >
-            Adicionar
-          </button>
+            <AddIcon />
+            Cadastrar
+          </Button>
         </div>
         {isLoading ? (
           <div>
             <p>Carregando...</p>
           </div>
         ) : (
-          <div>
-            <section>
+          <>
+            <section
+              className="flex flex-col items-center gap-10 w-screen"
+            >
               {search.length > 0 ? (
                 filteredClients.map((client) => (
                   <ClientCard
@@ -103,7 +112,7 @@ export default function Clients(): JSX.Element {
                 </Modal>
               )}
             </div>
-            <div>
+            <section>
             {isUpdate && (
               <Modal setShow={setUpdate}>
                 <RegisterCard
@@ -113,8 +122,8 @@ export default function Clients(): JSX.Element {
                 />
               </Modal>
             )}
-            </div>
-          </div>
+            </section>
+          </>
         )}
       </main>
     </>
