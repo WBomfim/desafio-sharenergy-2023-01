@@ -94,7 +94,7 @@ export default function Login(): JSX.Element {
           className='flex flex-col text-gray-500 text-xl font-bold'
             htmlFor='name-input'
           >
-            Nome:
+            Nome de usuário:
             <TextField
               id='name-input'
               type='text'
