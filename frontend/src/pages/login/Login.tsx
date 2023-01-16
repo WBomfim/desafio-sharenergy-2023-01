@@ -1,3 +1,4 @@
+import { Button, TextField, Checkbox } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
@@ -79,13 +80,22 @@ export default function Login(): JSX.Element {
   }
 
   return (
-    <main>
-      <section>
-        <h1>Bem Vindo!</h1>
-        <form>
-          <label htmlFor='name-input'>
+    <main
+      className="flex flex-col justify-center items-center h-screen bg-gray-300"
+    >
+      <section
+        className='flex flex-col items-center gap-8 p-8 bg-white rounded-xl shadow-xl'
+      >
+        <h1 className='text-4xl font-bold text-gray-700'>Bem Vindo!</h1>
+        <form
+          className='flex flex-col gap-8'
+        >
+          <label
+          className='flex flex-col text-gray-500 text-xl font-bold'
+            htmlFor='name-input'
+          >
             Nome:
-            <input
+            <TextField
               id='name-input'
               type='text'
               onChange={({ target: { value } }) => {
@@ -95,9 +105,12 @@ export default function Login(): JSX.Element {
             />
           </label>
 
-          <label htmlFor='password-input'>
+          <label
+            className='flex flex-col text-gray-500 text-xl font-bold'
+            htmlFor='password-input'
+          >
             Senha:
-            <input
+            <TextField
               id='password-input'
               type='password'
               onChange={({ target: { value } }) => {
@@ -106,17 +119,20 @@ export default function Login(): JSX.Element {
               placeholder='**********'
             />
           </label>
-  
-          <label htmlFor='remember-me'>
-            <input
+
+          <label
+            className='text-gray-600 font-bold'
+            htmlFor='remember-me'
+          >
+            <Checkbox
               id='remember-me'
-              type='checkbox'
               onChange={({ target: { checked } }) => setRememberMe(checked)}
             />
             Lembrar-me
           </label>
   
-          <button
+          <Button
+            className='bg-teal-600 hover:bg-teal-700 font-bold shadow-xl text-white h-12'
             type='submit'
             disabled={disabledButton}
             onClick={(event) => {
@@ -125,7 +141,7 @@ export default function Login(): JSX.Element {
             }}
           >
             ENTRAR
-          </button>
+          </Button>
 
           <div>
             {failedTryLogin && (
