@@ -14,6 +14,7 @@ export default function CatImages(): JSX.Element {
     if (code !== "") {
       const url = `https://http.cat/${code}`;
       setUrl(url);
+      setCode("");
     } else {
       setUrl("https://http.cat/0")
     }
