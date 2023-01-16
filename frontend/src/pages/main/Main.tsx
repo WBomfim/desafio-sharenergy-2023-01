@@ -1,3 +1,4 @@
+import { Button, Pagination, TextField } from "@mui/material";
 import { useState, useEffect } from "react";
 import Header from "../../components/header/Header";
 import UserCard, { User } from "../../components/userCard/UserCard";
@@ -62,38 +63,53 @@ export default function Main(): JSX.Element {
   return (
     <>
       <Header/>
-      <main>
-        <div>
-          <input
+      <main
+        className="flex flex-col items-center"
+      >
+        <div
+          className="flex gap-5 mt-5"
+        >
+          <TextField
             type="text"
             id="search-user"
             placeholder="Search a user"
             value={search}
             onChange={(e) => verifyInput(e)}
           />
-          <button
+          <Button
+            className="bg-teal-600 hover:bg-teal-700 font-bold px-8 shadow-lg text-white"
             type="button"
             onClick={onSearch}
           >
             Buscar
-          </button>
+          </Button>
         </div>
-        <div>
-          <div>
-            <button
+        <div
+          className="flex flex-col items-center gap-10 mt-5 w-4/5"
+        >
+          <div
+            className="flex justify-around gap-5 mt-5"
+          >
+            <Button
+              className="font-bold"
+              variant="outlined"
               type="button"
               onClick={prevPage}
             >
               anterior
-            </button>
-            <button
+            </Button>
+            <Button
+              className="font-bold"
+              variant="outlined"
               type="button"
               onClick={nextPage}
             >
               próximo
-            </button>
+            </Button>
           </div>
-          <section>
+          <section
+            className="flex flex-col items-center gap-10 w-3/4"
+          >
             {isLoading ? (
               <p>Loading...</p>
             ) : (
