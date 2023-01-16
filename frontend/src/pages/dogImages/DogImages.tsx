@@ -5,15 +5,18 @@ import { Button } from "@mui/material";
 
 export default function DogImages(): JSX.Element {
   const [url, setUrl] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     getDogImage();
   }, []);
 
   const getDogImage = async () => {
+    setIsLoading(true);
     const URL = "https://random.dog/woof.json";
     const { data: { url } } = await axios.get(URL);
     setUrl(url);
+    setIsLoading(false);
   };
 
   return (
@@ -34,11 +37,19 @@ export default function DogImages(): JSX.Element {
             Recarregar
           </Button>
         </div>
-        <img
-          src={url}
-          alt="dog"
-          className="w-2/5 max-h-screen  rounded-2xl"
-        />
+        {isLoading ? (
+          <div className="flex items-center justify-center">
+            <div
+              className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"
+            />
+          </div>
+        ) : (
+          <img
+            src={url}
+            alt="dog"
+            className="w-2/5 max-h-screen  rounded-2xl"
+          />
+        )}
       </main>
     </>
   );
